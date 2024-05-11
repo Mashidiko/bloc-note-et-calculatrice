@@ -59,3 +59,36 @@ def toggle_bold():
             text_widget.tag_add("bold", "sel.first", "sel.last")
             text_widget.tag_configure("bold", font=(current_font[0], current_font_size, "bold"))
 
+# Fonction pour activer/désactiver le style italique sur le texte sélectionné
+def toggle_italic():
+    if text_widget.tag_ranges("sel"):
+        current_tags = text_widget.tag_names("sel.first")
+        if "italic" in current_tags:
+            text_widget.tag_remove("italic", "sel.first", "sel.last")
+        else:
+            text_widget.tag_add("italic", "sel.first", "sel.last")
+            text_widget.tag_configure("italic", font=(current_font[0], current_font_size, "italic"))
+
+# Fonction pour activer/désactiver le style souligné sur le texte sélectionné
+def toggle_underline():
+    if text_widget.tag_ranges("sel"):
+        current_tags = text_widget.tag_names("sel.first")
+        if "underline" in current_tags:
+            text_widget.tag_remove("underline", "sel.first", "sel.last")
+        else:
+            text_widget.tag_add("underline", "sel.first", "sel.last")
+            text_widget.tag_configure("underline", underline=True)
+
+# Fonction pour choisir une police de caractères
+def choose_font(font_family):
+    global current_font
+    current_font = font_family
+    text_widget.config(font=font_family)
+
+# Fonction pour choisir la couleur du texte
+def choose_color():
+    color = askcolor()[1]  # Demander à l'utilisateur de choisir une couleur
+    if color:
+        text_widget.config(fg=color)
+
+
