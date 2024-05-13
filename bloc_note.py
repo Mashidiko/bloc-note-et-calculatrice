@@ -127,6 +127,15 @@ def calculator_button_click(event, entry):
         entry.delete(0, tk.END)
     else:
         entry.insert(tk.END, text)
+def copier():
+    text_widget.clipboard_clear()
+    text_widget.clipboard_append(text_widget.selection_get())  
+def coller():
+    text_widget.insert(INSERT,text_widget.clipboard_get())
+def couper():
+    text_widget.clipboard_get()
+    text_widget.delete(SEL_FIRST,SEL_LAST)
+
 
 # Créer la fenêtre principale de l'application
 root = tk.Tk()
@@ -157,6 +166,9 @@ for font in all_fonts:
 # Ajouter le menu "Couleur" à la barre de menu
 color_menu = tk.Menu(menu_bar, tearoff=0)
 color_menu.add_command(label="Couleur", command=choose_color)
+color_menu.add_command(label="copier", command=copier)
+color_menu.add_command(label="Coller", command=coller)
+color_menu.add_command(label="Couper", command=couper)
 menu_bar.add_cascade(label="Édition", menu=color_menu)
 
 # Ajouter un bouton pour ouvrir la calculatrice dans la barre de menu
