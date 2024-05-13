@@ -128,4 +128,66 @@ def calculator_button_click(event, entry):
     else:
         entry.insert(tk.END, text)
 
+# Créer la fenêtre principale de l'application
+root = tk.Tk()
+root.title("Éditeur de texte simple")
+
+# Créer la barre de menu
+menu_bar = tk.Menu(root)
+
+# Ajouter le menu "Fichier" à la barre de menu
+file_menu = tk.Menu(menu_bar, tearoff=0)
+file_menu.add_command(label="Nouveau", command=new_file)
+file_menu.add_command(label="Ouvrir", command=open_file)
+file_menu.add_command(label="Enregistrer", command=save_file)
+file_menu.add_command(label="Enregistrer sous", command=save_as_file)
+file_menu.add_separator()
+file_menu.add_command(label="Quitter", command=root.quit)
+menu_bar.add_cascade(label="Fichier", menu=file_menu)
+
+# Ajouter le menu "Police" à la barre de menu
+font_menu = tk.Menu(menu_bar, tearoff=0)
+menu_bar.add_cascade(label="Police", menu=font_menu)
+
+# Obtenir la liste de toutes les polices disponibles sur le système
+all_fonts = tkFont.families()
+for font in all_fonts:
+    font_menu.add_command(label=font, command=lambda f=font: choose_font((f, current_font_size)))
+
+# Ajouter le menu "Couleur" à la barre de menu
+color_menu = tk.Menu(menu_bar, tearoff=0)
+color_menu.add_command(label="Choisir couleur", command=choose_color)
+menu_bar.add_cascade(label="Couleur", menu=color_menu)
+
+# Ajouter un bouton pour ouvrir la calculatrice dans la barre de menu
+calculator_button = tk.Button(menu_bar, text="Ouvrir Calculatrice", command=open_calculator)
+menu_bar.add_command(label="Ouvrir Calculatrice", command=open_calculator)
+
+# Attacher la barre de menu à la fenêtre principale
+root.config(menu=menu_bar)
+
+# Créer la zone de texte
+text_widget = tk.Text(root)
+text_widget.pack(expand=True, fill='both')
+
+# Boutons pour les styles de texte
+toolbar_frame = tk.Frame(root,  borderwidth=3, bg='#557788')
+toolbar_frame.pack(fill='x')
+
+bold_button = tk.Button(toolbar_frame, text="Gras", command=toggle_bold,  borderwidth=2, bg='gray', activebackground='darkorange',relief = RAISED)
+bold_button.pack(side=tk.LEFT, padx=5)
+
+italic_button = tk.Button(toolbar_frame, text="Italique", command=toggle_italic, borderwidth=2, bg='gray', activebackground='darkorange',relief = RAISED)
+italic_button.pack(side=tk.LEFT, padx=5)
+
+underline_button = tk.Button(toolbar_frame, text="Souligné", command=toggle_underline,  borderwidth=2, bg='gray', activebackground='darkorange',relief = RAISED)
+underline_button.pack(side=tk.LEFT, padx=5)
+
+# Positionner la frame de la barre d'outils juste au-dessus de la zone de texte
+toolbar_frame.pack(side=tk.TOP, fill='x')
+
+# Lancer la boucle principale de l'interface utilisateur
+root.mainloop()
+
+
 
