@@ -156,12 +156,13 @@ for font in all_fonts:
 
 # Ajouter le menu "Couleur" à la barre de menu
 color_menu = tk.Menu(menu_bar, tearoff=0)
-color_menu.add_command(label="Choisir couleur", command=choose_color)
-menu_bar.add_cascade(label="Couleur", menu=color_menu)
+color_menu.add_command(label="Couleur", command=choose_color)
+menu_bar.add_cascade(label="Édition", menu=color_menu)
 
 # Ajouter un bouton pour ouvrir la calculatrice dans la barre de menu
-calculator_button = tk.Button(menu_bar, text="Ouvrir Calculatrice", command=open_calculator)
-menu_bar.add_command(label="Ouvrir Calculatrice", command=open_calculator)
+calculator_button = tk.Menu(menu_bar, tearoff=0)
+calculator_button.add_command(label="calculatrice",command=open_calculator)
+menu_bar.add_cascade(label="Options",menu=calculator_button )
 
 # Attacher la barre de menu à la fenêtre principale
 root.config(menu=menu_bar)
